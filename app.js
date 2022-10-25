@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const Blog = require('./models/blog')
+const { result } = require('lodash')
 
 //express app
 const app = express()
@@ -51,6 +53,19 @@ app.use(morgan('dev'))
 
 app.use(express.static('public'))
 
+app.get('/add-blog', (req, res) => {
+  const blog = new Blog({
+    title: "Sport",
+    snippet: "Liverpool 'could soon end 20-year transfer wait' as Naby Keïta truth is about to become clear",
+    body: "A 20-year Liverpool transfer wait could come to an end as Chelsea, Arsenal and Tottenham Hotspur reportedly weigh up a move for one of Jürgen Klopp's stars."
+  })
+
+  blog.save().then((result) => {
+    res.send(result)
+  }).catch((err) => {
+    console.log(err)
+  })
+})
 app.get('/', (req, res) => {
   const blogs = [
     {title: 'Yayner teaches React', snippet: 'lorem ispsum dolor sit amet consectelur'},
