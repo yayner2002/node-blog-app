@@ -1,10 +1,21 @@
 const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 
 //express app
 const app = express()
 
+//connection string
+
+const dbURI = 'mongodb+srv://yayner:yaysemyay@node-blog-app.klw82nj.mongodb.net/node-blog-app?retryWrites=true&w=majority'
+
+//connect to db using a package mongoose
+mongoose.connect(dbURI).then((result) => {
+  app.listen(3000, () => {
+    console.log("DB connected successfully...")
+  })
+}).catch((err) => console.log(err))
 //register view engine and a views folder as default
 app.set('view engine', 'ejs')
 
@@ -12,7 +23,7 @@ app.set('view engine', 'ejs')
 // app.set('views', 'myviews')
 
 //listen for requests
-app.listen(3000)
+// app.listen(3000)
 
 
 
