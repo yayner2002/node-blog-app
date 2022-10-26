@@ -8,6 +8,8 @@
 - nodejs
 - express
 - mongodb
+## app screnshot
+![mockup](/app_screenshot.png?raw=true "mockup")
 
 ## Live Demo (if available)
 
