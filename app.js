@@ -26,11 +26,10 @@ app.set('view engine', 'ejs')
 app.use(morgan('dev'))
 
 //middleware to use static files
-
 app.use(express.static('public'))
 
-
-
+//this middleware enables to pass the data sent from the web form to the req object and attache them to req.body
+app.use(express.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
   res.redirect('/blogs')
@@ -41,7 +40,6 @@ app.get('/about', (req, res) => {
 })
 
 //blog routes
-
 app.get('/blogs', (req, res) => {
   Blog.find().sort({createdAt: -1}).then((result) => {
     res.render('index', {title: 'All Blogs', blogs: result})
@@ -49,6 +47,17 @@ app.get('/blogs', (req, res) => {
   }).catch(err => {
     console.log(err)
   })
+})
+
+app.post('/blogs', (req, res) => {
+  const blog = new Blog(req.body)
+
+  blog.save().then((result) => {
+    res.redirect('./blogs')
+  }).catch((err) => {
+    console.log(err)
+  })
+
 })
 app.get('/blogs/create', (req, res) => {
   res.render('create', {title: "Create blog"})
