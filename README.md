@@ -1,6 +1,6 @@
 # Blog App
 
-> Simple blog app to demonstrate a node app
+> Simple blog app using node and express that does CRUD operation to demonstrate a node
 
 
 ## Built With
