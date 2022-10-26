@@ -71,8 +71,20 @@ app.get('/blogs/:id', (req, res) => {
   })
 
 })
+//delete request handler
+app.delete('/blogs/:id', (req, res) => {
+  const id = req.params.id
+
+  Blog.findByIdAndDelete(id).then((result) => {
+    res.json({ redirect: '/blogs'})
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+// create a new blog handler
 app.get('/blogs/create', (req, res) => {
-  res.render('create', {title: "Create blog"})
+  res.render('create', {title: "Create a blog"})
 })
 
 //404 page
