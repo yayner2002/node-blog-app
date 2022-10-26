@@ -21,15 +21,14 @@ mongoose.connect(dbURI).then((result) => {
 //register view engine and a views folder as default
 app.set('view engine', 'ejs')
 
-
-// third party middlware logger
-app.use(morgan('dev'))
-
 //middleware to use static files
 app.use(express.static('public'))
 
 //this middleware enables to pass the data sent from the web form to the req object and attache them to req.body
 app.use(express.urlencoded({extended: true}))
+
+// third party middlware logger
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
   res.redirect('/blogs')
@@ -54,11 +53,16 @@ app.post('/blogs', (req, res) => {
   const blog = new Blog(req.body)
 
   blog.save().then((result) => {
-    res.redirect('./blogs')
+    res.redirect('/blogs')
   }).catch((err) => {
     console.log(err)
   })
 
+})
+
+// create a new blog handler
+app.get('/blogs/create', (req, res) => {
+  res.render('create', {title: "Create a blog"})
 })
 
 //route params
@@ -82,10 +86,7 @@ app.delete('/blogs/:id', (req, res) => {
   })
 })
 
-// create a new blog handler
-app.get('/blogs/create', (req, res) => {
-  res.render('create', {title: "Create a blog"})
-})
+
 
 //404 page
 app.use((req, res) => {
