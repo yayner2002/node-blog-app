@@ -55,9 +55,9 @@ app.use(express.static('public'))
 
 app.get('/add-blog', (req, res) => {
   const blog = new Blog({
-    title: "Sport",
-    snippet: "Liverpool 'could soon end 20-year transfer wait' as Naby Keïta truth is about to become clear",
-    body: "A 20-year Liverpool transfer wait could come to an end as Chelsea, Arsenal and Tottenham Hotspur reportedly weigh up a move for one of Jürgen Klopp's stars."
+    title: "Sources: Man United close to agreeing deal with ex-Liverpool chief Michael Edwards after 'huge offer'",
+    snippet: "Man United are confident of beating Chelsea to the appointment of former Liverpool transfer guru Michael Edwards, sources have told Football Insider.",
+    body: "United are close to agreeing a deal with the 43-year-old and are willing to wait until next summer for him to join.The Premier League giants have made up their minds that Edwards is the right man to oversee their transfer business after so many expensive mistakes in the past and have submitted what is believe to be a “hugely attractive offer” to him."
   })
 
   blog.save().then((result) => {
@@ -66,6 +66,24 @@ app.get('/add-blog', (req, res) => {
     console.log(err)
   })
 })
+
+app.get('/all-blogs', (req, res) => {
+  Blog.find().then((result) => {
+    res.send(result)
+  }).catch((err) => {
+    console.log(err)
+  })
+
+})
+
+app.get('/single-blog', (req, res) => {
+  
+  Blog.findById('6357d8feeec21838ddd6ef24').then((result) => {
+    res.send(result)
+  }).catch(err => console.log(err))
+})
+
+
 app.get('/', (req, res) => {
   const blogs = [
     {title: 'Yayner teaches React', snippet: 'lorem ispsum dolor sit amet consectelur'},
