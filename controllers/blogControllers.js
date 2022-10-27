@@ -15,7 +15,7 @@ const blog_details = (req, res) => {
   Blog.findById(id).then((result) => {
     res.render('blogs/details', {blog: result, title: "Blog Detail"})
   }).catch((err) => {
-    res.status(404).render('404', {title: "ooops, page not found :)"})
+    res.status(404).render('404', {title: "404"})
   })
 
 }
