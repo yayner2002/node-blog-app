@@ -73,14 +73,17 @@
       right: 0;
       border-radius: 50%;
       padding: 10px;
-      background: red;
       color: #fff;
     }
     .delete:hover {
       cursor: pointer;
-      background: chocolate;
+      background: red;
       color: #000;
       box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+    }
+    .delete-icon {
+      width: 24px;
+      height: 24px;
     }
     /* create styles */
     .create-blog form{
